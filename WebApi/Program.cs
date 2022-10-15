@@ -1,5 +1,7 @@
 using WebApi.Data;
 using Microsoft.EntityFrameworkCore;
+using WebApi.interfaces;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,8 @@ builder.Services.AddDbContext<WebContext>(
         options.UseSqlite(connection);
     }
 );
+
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 

@@ -9,9 +9,7 @@ using WebApi.Data;
 
 namespace WebApi.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController:ControllerBase
+    public class UsersController:BaseApiController
     {
         private WebContext _webContext;
         public UsersController(WebContext webContext)
