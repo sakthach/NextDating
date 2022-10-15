@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Entities;
 using WebApi.interfaces;
@@ -18,13 +15,14 @@ namespace WebApi.Services
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
-       public  string CreateToken(AppUser  user){
+        public  string CreateToken(AppUser  user){
 
             var claims = new List<Claim>{
                 new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
             };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+
             var tokenDescriptor = new SecurityTokenDescriptor{
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(7),

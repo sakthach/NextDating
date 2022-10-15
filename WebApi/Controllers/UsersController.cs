@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Entities;
 using WebApi.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
@@ -18,6 +19,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUsers(){
             var users = await _webContext.Users.ToListAsync();
             if(users == null){
@@ -27,7 +29,7 @@ namespace WebApi.Controllers
             return Ok(users);
                 
         }
-
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id){
             var user = await _webContext.Users.FindAsync(id);
