@@ -1,0 +1,22 @@
+<div class="container d-flex justify-content-center">
+  <div *ngIf="!loggedIn">
+    <section *ngIf="!registerMode">
+      <p class="fs-2">Find your match</p>
+      <p class="lead mb-0">
+        Come to view your match... all you need to do is register now!
+      </p>
+      <p class="fs-6">Your love is waiting for you...</p>
+      <button class="btn btn-primary" (click)="registerToggle()">
+        Click here
+      </button>
+    </section>
+    <section *ngIf="registerMode">
+      <app-register
+        (cancelFromRegister)="cancleRegisterNow($event)"
+      ></app-register>
+    </section>
+  </div>
+  <div *ngIf="loggedIn">
+    <p class="text-danger">Exploring your emotions ...</p>
+  </div>
+</div>

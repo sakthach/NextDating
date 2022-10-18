@@ -11,6 +11,8 @@ namespace WebApi.Extenstions
  
             Services.AddScoped<ITokenService, TokenService>();
             var myString = config.GetSection("TokenKey");
+
+            
             Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters {
