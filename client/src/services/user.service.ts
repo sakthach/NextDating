@@ -13,6 +13,6 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   fetchUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url + 'api/users');
+    return this.http.get<User[]>(this.url + 'users');
   }
 }

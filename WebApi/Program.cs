@@ -2,6 +2,7 @@ using WebApi.Data;
 using Microsoft.EntityFrameworkCore;
 
 using WebApi.Extenstions;
+using WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
 var connection = builder.Configuration.GetConnectionString("dbString");
 builder.Services.AddDbContext<WebContext>(
     options => {
@@ -19,8 +22,9 @@ builder.Services.AddDbContext<WebContext>(
     }
 );
 
-
 builder.Services.AddApplicationServices(builder.Configuration);
+
+
 
 var app = builder.Build();
 
@@ -30,6 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseAuthentication();

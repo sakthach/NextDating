@@ -1,0 +1,12 @@
+<div class="card m-2" style="width: 15rem">
+  <a href="" [routerLink]="['/members', member.userName]">
+    <img
+      src="{{ member.photoUrl }}"
+      class="card-img-top"
+      alt="{{ member.knowAs }}"
+    />
+  </a>
+  <div class="card-body">
+    <h5 class="card-title">{{ member.userName }}</h5>
+  </div>
+</div>

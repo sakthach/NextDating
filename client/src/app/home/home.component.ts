@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/services/user.service';
 import { AccountService } from 'src/_services/account.service';
 
 @Component({
@@ -13,23 +12,9 @@ export class HomeComponent implements OnInit {
   users: any = [];
   loggedIn = false;
 
-  constructor(
-    private userService: UserService,
-    private accountSevice: AccountService,
-    private route: Router
-  ) {}
+  constructor(private accountSevice: AccountService, private route: Router) {}
 
-  ngOnInit(): void {
-    this.userService.fetchUsers().subscribe((res) => {
-      this.users = res;
-      this.accountSevice.currentUser$.subscribe((user) => {
-        console.log(user);
-        if (user) {
-          this.loggedIn = true;
-        }
-      });
-    });
-  }
+  ngOnInit(): void {}
 
   cancleRegisterNow(event: boolean) {
     this.registerMode = event;
@@ -37,7 +22,6 @@ export class HomeComponent implements OnInit {
 
   registerToggle() {
     this.accountSevice.currentUser$.subscribe((user) => {
-      console.log(user);
       if (user) {
         this.route.navigate(['/']);
       } else {

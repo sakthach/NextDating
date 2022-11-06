@@ -1,0 +1,30 @@
+<div class="container">
+  <form action="" *ngIf="member" #f="ngForm">
+    <div class="mb-3">
+      <label for="" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="member.userName"
+        name="firstName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label"
+        >Introduction</label
+      >
+      <textarea
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"
+        name="introduction"
+        [(ngModel)]="member.introduction"
+        >{{ member.introduction }}</textarea
+      >
+    </div>
+
+    <button class="btn btn-primary" type="button" (click)="updateMember()">
+      Update
+    </button>
+  </form>
+</div>

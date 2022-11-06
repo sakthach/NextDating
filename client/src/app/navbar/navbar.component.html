@@ -40,7 +40,8 @@
       </ul>
 
       <span class="text-danger me-5" *ngIf="accoutService.currentUser$ | async">
-        Welcome {{ accoutService.username() }}
+        Welcome
+        <a [routerLink]="['/member/edit']"> {{ accoutService.username() }} </a>
       </span>
 
       <form
