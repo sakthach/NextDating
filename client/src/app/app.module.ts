@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -19,6 +20,8 @@ import { SharedModule } from './_modules/shared.module';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './_intercept/jwt.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
     MessagesComponent,
     MemberCardComponent,
     MemberEditComponent,
+    PhotoEditorComponent,
+    TextInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
     NgbModule,
     FormsModule,
     SharedModule,
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

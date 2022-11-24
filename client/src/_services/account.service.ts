@@ -14,6 +14,7 @@ export class AccountService {
   user: User = {
     username: '',
     token: '',
+    photoUrl: '',
   };
 
   constructor(private http: HttpClient, private route: Router) {}
@@ -34,8 +35,7 @@ export class AccountService {
     return this.http.post<User>(this.baseUrl + 'acount/register', data).pipe(
       map((resp: User) => {
         if (resp) {
-          localStorage.setItem('user', JSON.stringify(resp));
-          this.currentUserSource.next(resp);
+          this.setCurrentUser(resp);
         }
       })
     );
@@ -43,6 +43,7 @@ export class AccountService {
 
   setCurrentUser(user: User) {
     this.currentUserSource.next(user);
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   logout() {

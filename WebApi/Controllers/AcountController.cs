@@ -49,10 +49,14 @@ namespace WebApi.Controllers
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(RegisterDto request){
+
+        // find a user by username and include the photo as well
             
-            var user = await _webContext.Users.SingleOrDefaultAsync(x => x.UserName == request.Username );
+            var user = await _webContext.Users.Include(p => p.Photos)
+            .SingleOrDefaultAsync(x => x.UserName == request.Username );
+        // check if username exist or not
             if(user == null) return Unauthorized("invalid");
-            
+        // validate user by password    
             using var hmac = new HMACSHA512(user.PasswordSalt);
             var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(request.Password));
 
@@ -60,9 +64,13 @@ namespace WebApi.Controllers
                 if(computedHash[i] != user.PasswordHash[i]) return Unauthorized("invalid");
             }
 
+        // Once user is successfully logged in
+        // We return back  username, token and photoUrl
+
             return new UserDto {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url // we return a photo isMain is true.
             };
         }
 

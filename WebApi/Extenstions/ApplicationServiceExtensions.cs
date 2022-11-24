@@ -14,6 +14,7 @@ namespace WebApi.Extenstions
             
             Services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             Services.AddScoped<ITokenService, TokenService>();
+            Services.AddScoped<IphotoService, PhotoService>();
             Services.AddScoped<IUserRepository, UserRepository>();
             Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
